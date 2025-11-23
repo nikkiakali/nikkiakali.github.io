@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natasha Akali | AI & Systems Engineer</title>
+    <style>
+        /* ============================================
+           RESET & GLOBAL STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
+            color: #e8e9ed;
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: 0.02em;
+            font-weight: 600;
+            color: #f5f5f7;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            color: #c4c4c9;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: #9b1b30;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #c41e3a;
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           LAYOUT UTILITIES
+           ============================================ */
+        .container {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #9b1b30;
+            margin: 1rem auto 0;
+        }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(155, 27, 48, 0.2);
+            padding: 1rem 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f5f5f7;
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .navbar-nav a {
+            color: #c4c4c9;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav a:hover {
+            color: #9b1b30;
+            text-decoration: none;
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #9b1b30;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #b32338;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(155, 27, 48, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 2px solid #9b1b30;
+            color: #9b1b30;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(155, 27, 48, 0.1);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        #home {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-left h1 {
+            background: linear-gradient(135deg, #f5f5f7 0%, #c4c4c9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-tagline {
+            font-size: 1.35rem;
+            color: #c4c4c9;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-meta {
+            color: #8a8a8f;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlights-card {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .highlights-card h4 {
+            color: #9b1b30;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .highlight-item::before {
+            content: '→';
+            color: #9b1b30;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .highlight-item p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #c4c4c9;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        #about {
+            background: rgba(26, 31, 46, 0.3);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .glance-box {
+            background: rgba(15, 20, 25, 0.8);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            height: fit-content;
+        }
+
+        .glance-box h4 {
+            color: #9b1b30;
+            margin-bottom: 1.5rem;
+        }
+
+        .glance-item {
+            margin-bottom: 1.25rem;
+        }
+
+        .glance-item strong {
+            display: block;
+            color: #f5f5f7;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .glance-item p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .glance-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .glance-links a {
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           CARDS (Projects, Experience, Notes)
+           ============================================ */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(155, 27, 48, 0.2);
+            border-color: rgba(155, 27, 48, 0.4);
+        }
+
+        .card h3 {
+            color: #f5f5f7;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: #9b1b30;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .card ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .card ul li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #c4c4c9;
+            font-size: 0.95rem;
+        }
+
+        .card ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #9b1b30;
+            font-weight: bold;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #9b1b30;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .card-link:hover {
+            color: #c41e3a;
+        }
+
+        /* ============================================
+           EXPERIENCE SECTION
+           ============================================ */
+        .experience-timeline {
+            margin-top: 3rem;
+        }
+
+        .experience-item {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 2.5rem;
+            width: 3px;
+            height: calc(100% - 3rem);
+            background: linear-gradient(to bottom, #9b1b30, transparent);
+        }
+
+        .experience-item:hover {
+            transform: translateX(8px);
+            border-color: rgba(155, 27, 48, 0.4);
+        }
+
+        .experience-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-header h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-meta {
+            color: #8a8a8f;
+            font-size: 0.9rem;
+        }
+
+        .experience-company {
+            color: #9b1b30;
+            font-weight: 500;
+        }
+
+        .experience-item ul {
+            list-style: none;
+        }
+
+        .experience-item ul li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #c4c4c9;
+        }
+
+        .experience-item ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #9b1b30;
+        }
+
+        /* ============================================
+           SKILLS SECTION
+           ============================================ */
+        #skills {
+            background: rgba(26, 31, 46, 0.3);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(15, 20, 25, 0.8);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .skill-category h4 {
+            color: #9b1b30;
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(155, 27, 48, 0.1);
+            border: 1px solid rgba(155, 27, 48, 0.3);
+            color: #e8e9ed;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(155, 27, 48, 0.2);
+            border-color: rgba(155, 27, 48, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           RESUME SECTION
+           ============================================ */
+        .resume-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .resume-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        #contact {
+            background: rgba(26, 31, 46, 0.3);
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-email {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #9b1b30;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: rgba(15, 20, 25, 0.9);
+            border-top: 1px solid rgba(155, 27, 48, 0.2);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer p {
+            margin: 0;
+            color: #8a8a8f;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #8a8a8f;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: #9b1b30;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 968px) {
+            .hero-content,
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            h1 {
+                font-size: 2.75rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .navbar-nav {
+                gap: 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            h1 {
+                font-size: 2.25rem;
+            }
+
+            .navbar-nav {
+                display: none;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-tagline {
+                font-size: 1.15rem;
+            }
+
+            .experience-item {
+                padding-left: 1.5rem;
+            }
+
+            .experience-item::before {
+                left: 0.5rem;
+            }
+        }
+
+        /* ============================================
+           ACCESSIBILITY
+           ============================================ */
+        *:focus {
+            outline: 2px solid #9b1b30;
+            outline-offset: 2px;
+        }
+
+        a:focus {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         NAVBAR
+         ============================================ -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#home" class="navbar-brand">Natasha Akali</a>
+            <ul class="navbar-nav">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#thinking">Thinking</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section id="home" class="section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <h1>Natasha Akali</h1>
+                    <p class="hero-tagline">Building intelligent systems at the intersection of AI, agents, and full-stack engineering.</p>
+                    <p class="hero-meta">Founding Software Engineer at Simbie AI · Ex-Microsoft · CS/IS, Carnegie Mellon</p>
+                    <div class="btn-group">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="Natasha_Akali_Resume_2025.pdf" class="btn btn-ghost" download>Download CV</a>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="highlights-card">
+                        <h4>Recent Highlights</h4>
+                        <div class="highlight-item">
+                            <p>Built an OpenAI-powered support agent processing 500+ tickets and surfacing customer trends.</p>
+                        </div>
+                        <div class="highlight-item">
+                            <p>Created Job Tracker tools to structure and analyze job-application workflows.</p>
+                        </div>
+                        <div class="highlight-item">
+                            <p>Designed AI-assisted tools for resumes and safe dining for celiac users.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT SECTION
+         ============================================ -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a software engineer passionate about building AI-powered systems that solve real-world problems. My work spans from designing intelligent customer support agents to creating tools that help people make better decisions—whether that's navigating the job market or dining safely with dietary restrictions.</p>
+                    
+                    <p>I thrive at the intersection of machine learning, systems engineering, and product development. My projects range from building lightweight LLM implementations from scratch to deploying full-stack applications that integrate OpenAI APIs, vector search, and custom ML pipelines. I'm driven by the challenge of making AI systems not just powerful, but reliable, interpretable, and genuinely useful.</p>
+                    
+                    <p>Looking ahead, I'm eager to pursue graduate-level work in AI systems, focusing on reliability, applied machine learning, and the engineering challenges of deploying intelligent agents at scale. I want to contribute to the next generation of AI tools that are both technically sophisticated and thoughtfully designed for their human users.</p>
+                </div>
+                <div class="about-sidebar">
+                    <div class="glance-box">
+                        <h4>At a Glance</h4>
+                        <div class="glance-item">
+                            <strong>Location</strong>
+                            <p>U.S.-based</p>
+                        </div>
+                        <div class="glance-item">
+                            <strong>Interests</strong>
+                            <p>AI agents, applied ML, system design, security & reliability</p>
+                        </div>
+                        <div class="glance-item">
+                            <strong>Education</strong>
+                            <p>Carnegie Mellon University — B.S. Information Systems & Computer Science (2024)</p>
+                        </div>
+                        <div class="glance-item">
+                            <strong>Connect</strong>
+                            <div class="glance-links">
+                                <a href="https://linkedin.com/in/natashaakali" target="_blank">LinkedIn</a>
+                                <a href="https://github.com/nikkiakali" target="_blank">GitHub</a>
+                                <a href="mailto:nikki.akali@gmail.com">Email</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PROJECTS SECTION
+         ============================================ -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Selected Projects</h2>
+            <div class="cards-grid">
+                <!-- Project 1: Pocket-LLM -->
+                <div class="card">
+                    <h3>Pocket-LLM</h3>
+                    <p class="card-subtitle">Python · Transformers · Deep Learning</p>
+                    <ul>
+                        <li>Lightweight GPT-style language model built from scratch for experimentation on small datasets</li>
+                        <li>Implemented custom tokenizer, transformer architecture, and inference pipeline optimized for local deployment</li>
+                        <li>Deep dive into understanding how large language models work internally—from attention mechanisms to positional encodings</li>
+                    </ul>
+                    <a href="https://github.com/nikkiakali" class="card-link">View Code →</a>
+                </div>
+
+                <!-- Project 2: Job Tracker -->
+                <div class="card">
+                    <h3>Job Tracker</h3>
+                    <p class="card-subtitle">JavaScript · Chrome APIs · Webhooks</p>
+                    <ul>
+                        <li>Chrome extension for tracking job applications with one-click saving, CSV export, and webhook integration</li>
+                        <li>Automatically extracts application metadata from job posting pages and organizes into structured format</li>
+                        <li>Enables AI enrichment pipeline via webhook—sending application data to external systems for analysis and insights</li>
+                    </ul>
+                    <a href="https://github.com/nikkiakali" class="card-link">View Code →</a>
+                </div>
+
+                <!-- Project 3: Resume Assistant -->
+                <div class="card">
+                    <h3>Resume Assistant</h3>
+                    <p class="card-subtitle">Python · React · OpenAI API</p>
+                    <ul>
+                        <li>AI-powered tool that tailors resumes to specific job descriptions using GPT models</li>
+                        <li>Parses resume content, analyzes job requirements, and rewrites sections to highlight relevant experience</li>
+                        <li>Full-stack application with React frontend for document editing and Python backend for LLM integration</li>
+                    </ul>
+                    <a href="https://github.com/nikkiakali" class="card-link">View Code →</a>
+                </div>
+
+                <!-- Project 4: Celiac Disease Dining Companion -->
+                <div class="card">
+                    <h3>Celiac Disease Dining Companion</h3>
+                    <p class="card-subtitle">Python · React · LLMs · Vector Similarity</p>
+                    <ul>
+                        <li>Cross-platform app helping celiac users track symptoms and discover safer restaurant options</li>
+                        <li>Uses LLM-based risk analysis to evaluate menu items and ingredient lists for gluten contamination</li>
+                        <li>Vector similarity search over symptom logs and dining history to personalize recommendations and identify triggers</li>
+                    </ul>
+                    <a href="https://github.com/nikkiakali" class="card-link">View Code →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         THINKING & NOTES SECTION
+         ============================================ -->
+    <section id="thinking" class="section">
+        <div class="container">
+            <h2 class="section-title">Thinking & Notes</h2>
+            <div class="cards-grid">
+                <!-- Note 1 -->
+                <div class="card">
+                    <h3>Designing Reliable LLM Agents for Customer Support</h3>
+                    <p>Lessons learned from building production support agents: how careful prompt structuring, tool design, and error handling separate functional prototypes from reliable systems. Explores the tradeoffs between agent autonomy and predictability, and why failure modes matter as much as success metrics.</p>
+                </div>
+
+                <!-- Note 2 -->
+                <div class="card">
+                    <h3>Structuring Job-Application Data from Messy Email Streams</h3>
+                    <p>Thoughts on extracting signal from unstructured application workflows. Using domain heuristics, status classification, and strategic LLM calls to transform chaotic email threads into structured data. When to lean on rules-based systems versus when to trust language models.</p>
+                </div>
+
+                <!-- Note 3 -->
+                <div class="card">
+                    <h3>AI for Safer Dining with Celiac Disease</h3>
+                    <p>Exploring how symptom logging, embeddings, and semantic search can reduce risk for people with celiac disease. The challenge of building trust in AI recommendations when mistakes have real health consequences. Combining structured data with LLM-based reasoning to surface patterns humans might miss.</p>
+                </div>
+
+                <!-- Note 4 -->
+                <div class="card">
+                    <h3>Building Lightweight ML Tools for Personal Use</h3>
+                    <p>Why building tools for yourself is one of the best ways to learn. Reflections on implementing transformers from scratch, designing chrome extensions, and integrating OpenAI APIs—small projects that teach systems thinking, API design, and what it takes to ship something functional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         EXPERIENCE SECTION
+         ============================================ -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-timeline">
+                <!-- Experience 1: Microsoft -->
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Customer Success Account Manager</h3>
+                        <p class="experience-meta">
+                            <span class="experience-company">Microsoft</span> · Redmond, WA · 2024 – Present
+                        </p>
+                    </div>
+                    <ul>
+                        <li>Managed portfolio of high-value enterprise accounts, focusing on AI and automation solutions</li>
+                        <li>Designed and deployed OpenAI-powered support agent that processed 500+ customer tickets, automated response generation, and surfaced emerging trends across accounts</li>
+                        <li>Improved workflow efficiency by building intelligent tooling that reduced manual ticket triage time by 40%</li>
+                    </ul>
+                </div>
+
+                <!-- Experience 2: Carnegie Mellon -->
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Machine Learning Researcher</h3>
+                        <p class="experience-meta">
+                            <span class="experience-company">Carnegie Mellon University, Schwartz Research Lab</span> · Pittsburgh, PA · 2023 – 2024
+                        </p>
+                    </div>
+                    <ul>
+                        <li>Developed ML pipelines for analyzing RNA sequences, improving detection accuracy of structural patterns by 25%</li>
+                        <li>Contributed to research on using graph neural networks for modeling protein-protein interactions</li>
+                    </ul>
+                </div>
+                
+                <!-- Experience 3: Highmark Health -->
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Software Engineer Intern</h3>
+                        <p class="experience-meta">
+                            <span class="experience-company">Highmark Health</span> · Pittsburgh, PA · Summer 2023
+                        </p>
+                    </div>
+                    <ul>
+                        <li>Built a full-stack insurance recommendation platform using Go for the backend and React for the frontend</li>
+                        <li>Engineered a content-based filtering system to match users with suitable insurance plans</li>
+                    </ul>
+                </div>
+                
+                <!-- Experience 4: PNC -->
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Security Analyst Intern</h3>
+                        <p class="experience-meta">
+                            <span class="experience-company">PNC</span> · Pittsburgh, PA · Summer 2022
+                        </p>
+                    </div>
+                    <ul>
+                        <li>Performed security assessments and threat modeling for customer-facing financial applications</li>
+                        <li>Developed scripts to automate detection of misconfigurations, reducing manual audit time</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         RESUME (CV) SECTION
+         ============================================ -->
+    <section id="resume" class="section">
+        <div class="container resume-content">
+            <h2 class="section-title">Resume</h2>
+            <p>For a more detailed, one-page summary of my experience and qualifications, please download my CV.</p>
+            <a href="assets/resume.pdf" class="btn btn-primary" download>Download CV (PDF)</a>
+        </div>
+    </section>
+    
+    <!-- ============================================
+         CONTACT SECTION
+         ============================================ -->
+    <section id="contact" class="section">
+        <div class="container contact-content">
+            <h2 class="section-title">Get In Touch</h2>
+            <p>I’m always happy to talk about AI systems, agents, and applied ML. Feel free to reach out!</p>
+            <a href="mailto:nikki.akali@gmail.com" class="contact-email">nikki.akali@gmail.com</a>
+            <div class="footer-links" style="justify-content: center;">
+                <a href="https://linkedin.com/in/natashaakali" target="_blank">LinkedIn</a>
+                <a href="https://github.com/nikkiakali" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Natasha Akali. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
