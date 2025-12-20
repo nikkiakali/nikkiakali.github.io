@@ -278,11 +278,16 @@
         }
 
         .about-content {
-            display: grid;
-            grid-template-columns: 1.25fr 1fr;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 4rem;
-            align-items: start;
-            width: 100%; /* Ensure it takes full width within its parent container */
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            text-align: left;
         }
 
         .about-text p {
@@ -297,6 +302,7 @@
             border-radius: 12px;
             padding: 2rem;
             height: fit-content;
+            justify-self: center;
         }
 
         .glance-box h4 {
@@ -597,8 +603,7 @@
            RESPONSIVE DESIGN
            ============================================ */
         @media (max-width: 968px) {
-            .hero-content,
-            .about-content {
+            .hero-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
