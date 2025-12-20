@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Designing Reliable LLM Agents for Customer Support | Natasha Akali</title>
+    <title>Designing Reliable LLM Agents Through the Lens of LLM Compilers | Natasha Akali</title>
+
     <style>
         /* ============================================
-           RESET & GLOBAL STYLES
+           RESET & GLOBAL STYLES (unchanged)
            ============================================ */
         * {
             margin: 0;
@@ -27,54 +28,41 @@
             overflow-x: hidden;
         }
 
-        /* ============================================
-           TYPOGRAPHY
-           ============================================ */
-        h1, h2, h3, h4, h5, h6 {
+        h1, h2, h3 {
             letter-spacing: 0.02em;
             font-weight: 600;
             color: #f5f5f7;
         }
 
         h1 {
-            font-size: clamp(2.25rem, 5vw + 1rem, 3.5rem);
-            line-height: 1.1;
-            margin-bottom: 1rem;
+            font-size: clamp(2.25rem, 5vw + 1rem, 3.25rem);
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
         }
 
         h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-        }
-
-        h4 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
+            font-size: 1.9rem;
+            margin-top: 3.5rem;
+            margin-bottom: 1.25rem;
         }
 
         p {
             color: #c4c4c9;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
         }
 
         a {
             color: #9b1b30;
             text-decoration: none;
-            transition: all 0.3s ease;
         }
 
         a:hover {
-            color: #c41e3a;
             text-decoration: underline;
         }
 
         /* ============================================
-           LAYOUT UTILITIES
+           LAYOUT
            ============================================ */
         .container {
             max-width: 1040px;
@@ -86,28 +74,13 @@
             padding: 6rem 0;
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: #9b1b30;
-            margin: 1rem auto 0;
-        }
-
         /* ============================================
-           NAVBAR
+           NAVBAR (unchanged)
            ============================================ */
         .navbar {
             position: sticky;
             top: 0;
-            background: linear-gradient(135deg, rgba(15, 20, 25, 0.9) 0%, rgba(26, 31, 46, 0.8) 100%);
+            background: linear-gradient(135deg, rgba(15, 20, 25, 0.9), rgba(26, 31, 46, 0.85));
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(155, 27, 48, 0.2);
             padding: 1rem 0;
@@ -124,7 +97,6 @@
             font-size: 1.25rem;
             font-weight: 600;
             color: #f5f5f7;
-            text-decoration: none;
         }
 
         .navbar-nav {
@@ -134,30 +106,43 @@
         }
 
         .navbar-nav a {
-            position: relative;
             color: #c4c4c9;
-            text-decoration: none;
             font-size: 0.95rem;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
             padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
         }
 
-        .navbar-nav a:hover {
-            color: #9b1b30;
-            border-bottom-color: #9b1b30;
-        }
-
+        .navbar-nav a:hover,
         .navbar-nav a.nav-link--active {
             color: #9b1b30;
             border-bottom-color: #9b1b30;
         }
+
+        /* ============================================
+           NOTE / ESSAY STYLES
+           ============================================ */
+        .note-container {
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .note-meta {
+            color: #9aa0a6;
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+        }
+
+        .note-divider {
+            height: 1px;
+            background: rgba(155, 27, 48, 0.25);
+            margin: 3rem 0;
+        }
     </style>
 </head>
+
 <body>
-    <!-- ============================================
-         NAVBAR
-         ============================================ -->
+
+    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container">
             <a href="/#home" class="navbar-brand">Natasha Akali</a>
@@ -173,13 +158,85 @@
         </div>
     </nav>
 
-    <!-- ============================================
-         NOTE CONTENT SECTION
-         ============================================ -->
-    <section id="note" class="section">
-        <div class="container" style="max-width: 800px;">
-            <h1>Designing Reliable LLM Agents for Customer Support</h1>
-            <p>Lessons learned from building production support agents: how careful prompt structuring, tool design, and error handling separate functional prototypes from reliable systems. Explores the tradeoffs between agent autonomy and predictability, and why failure modes matter as much as success metrics.</p>
+    <!-- NOTE CONTENT -->
+    <section class="section">
+        <div class="note-container">
+
+            <h1>Reliable LLM Agents</h1>
+            <div class="note-meta">Thoughts on LLM Compilers and Reliable Systems</div>
+
+            <p>
+                Large language models have shifted how we think about software construction. Instead of explicitly coding control flow, we increasingly describe intent and allow models to infer execution. This shift is powerful, but it exposes a tension that becomes unavoidable at scale: LLMs are expressive, but systems demand predictability.
+            </p>
+
+            <p>
+                As LLMs move from isolated inference calls to long-lived agents embedded in real systems, reliability becomes the dominant challenge. The question is no longer whether a model can generate plausible output, but whether its behavior can be reasoned about, constrained, and verified. In this sense, agent design begins to resemble a classic systems problem rather than a modeling one.
+            </p>
+
+            <h2>From Generation to Compilation</h2>
+
+            <p>
+                Traditional software systems operate on a clear abstraction stack. Source code is parsed into intermediate representations, transformed through a series of passes, validated, and finally executed. Each stage introduces constraints that reduce ambiguity and make behavior predictable.
+            </p>
+
+            <p>
+                LLM-based agents often collapse these stages into a single generative step. A prompt encodes intent, and the model produces free-form text that downstream systems attempt to interpret. This works at small scales, but as complexity increases, failures become silent and difficult to debug.
+            </p>
+
+            <p>
+                Viewing agent execution through a compiler lens suggests a different approach: separate intent specification from execution and introduce explicit intermediate representations that can be inspected, validated, and transformed. Instead of asking a model to perform a task directly, we ask it to propose a structured plan for doing so.
+            </p>
+
+            <h2>Intermediate Representations as a Core Abstraction</h2>
+
+            <p>
+                At the heart of reliable agent design is the intermediate representation (IR). An IR captures the semantic meaning of a request without committing to execution details. In compiler design, IRs enable optimization, verification, and portability. In LLM agents, they serve an analogous role.
+            </p>
+
+            <p>
+                A well-designed IR is expressive enough to capture intent, constrained enough to limit ambiguity, and structured enough to be verified independently of the model that produced it. By ensuring that models emit IRs rather than executable actions, systems retain control over correctness.
+            </p>
+
+            <h2>Verification as a First-Class Concern</h2>
+
+            <p>
+                Once outputs are structured, verification becomes possible. Generated IRs can be checked for internal consistency, semantic validity, and alignment with system constraints before execution. Reliability becomes a system invariant rather than a probabilistic property of the model.
+            </p>
+
+            <p>
+                This also improves observability. Intermediate artifacts can be logged and inspected, turning opaque failures into diagnosable system states. In large-scale systems, this transparency is non-negotiable.
+            </p>
+
+            <h2>Scaling to Enterprise Systems</h2>
+
+            <p>
+                At enterprise scale, unpredictability compounds. Systems evolve, interfaces change, and multiple teams interact with shared infrastructure. Intermediate representations act as stable contracts, decoupling model evolution from system behavior.
+            </p>
+
+            <p>
+                This decoupling allows organizations to iterate rapidly on models while preserving operational safety. The compiler-inspired approach absorbs change without destabilizing production workflows.
+            </p>
+
+            <h2>Tradeoffs and Reflections</h2>
+
+            <p>
+                Introducing IRs and verification layers increases system complexity and latency. However, these costs mirror familiar tradeoffs in systems engineering: raw flexibility rarely coexists with reliability. The goal is not to constrain models unnecessarily, but to channel their generative power through disciplined abstractions.
+            </p>
+
+            <p>
+                What makes the compiler framing compelling is that it reapplies decades of systems wisdom to a new computational substrate. LLMs do not invalidate principles like verification and abstraction; they make them essential.
+            </p>
+
+            <h2>Open Questions</h2>
+
+            <p>
+                Several questions remain open: How can intermediate representations evolve without sacrificing verifiability? Can verification itself be partially model-assisted while remaining formally checkable? What abstractions best express intent across domains?
+            </p>
+
+            <p>
+                These questions sit at the intersection of machine learning, programming languages, and systems engineering, and they will shape how reliable AI systems are built.
+            </p>
+
         </div>
     </section>
 
