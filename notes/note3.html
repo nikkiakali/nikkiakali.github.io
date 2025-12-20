@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI for Safer Dining with Celiac Disease | Natasha Akali</title>
+    <title>Evaluating Intelligent Systems | Natasha Akali</title>
     <style>
         /* ============================================
            RESET & GLOBAL STYLES
@@ -42,9 +42,11 @@
             margin-bottom: 1rem;
         }
 
+        /* Tune h2 for essay sections (more readable than 2.5rem) */
         h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.9rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
         }
 
         h3 {
@@ -59,7 +61,8 @@
 
         p {
             color: #c4c4c9;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
         }
 
         a {
@@ -152,8 +155,22 @@
             color: #9b1b30;
             border-bottom-color: #9b1b30;
         }
+
+        /* ============================================
+           NOTE / ESSAY LAYOUT
+           ============================================ */
+        .note-container {
+            max-width: 800px;
+        }
+
+        .note-meta {
+            color: #9aa0a6;
+            font-size: 0.95rem;
+            margin-bottom: 2.75rem;
+        }
     </style>
 </head>
+
 <body>
     <!-- ============================================
          NAVBAR
@@ -177,9 +194,149 @@
          NOTE CONTENT SECTION
          ============================================ -->
     <section id="note" class="section">
-        <div class="container" style="max-width: 800px;">
-            <h1>AI for Safer Dining with Celiac Disease</h1>
-            <p>Exploring how symptom logging, embeddings, and semantic search can reduce risk for people with celiac disease. The challenge of building trust in AI recommendations when mistakes have real health consequences. Combining structured data with LLM-based reasoning to surface patterns humans might miss.</p>
+        <div class="container note-container">
+            <h1>Evaluating Intelligent Systems</h1>
+            <div class="note-meta">Thoughts on metrics, observability, and feedback loops</div>
+
+            <p>
+                Evaluation is often treated as a downstream concern. Models are trained, systems are deployed, and metrics are added as an afterthought.
+                This framing works for static software, but it breaks down for intelligent systems. When behavior is learned rather than explicitly coded,
+                evaluation becomes part of the system itself.
+            </p>
+
+            <p>
+                The core challenge is not whether an AI system performs well at a single point in time, but whether it behaves reliably as conditions change.
+                In this sense, evaluation is less about scoring outputs and more about maintaining trust over time.
+            </p>
+
+            <h2>Evaluation Is a Systems Problem</h2>
+
+            <p>
+                In traditional software, correctness is binary. A function either satisfies its specification or it does not. Tests encode expected behavior,
+                and failures are explicit. Intelligent systems violate these assumptions. Outputs are probabilistic, specifications are fuzzy, and failure modes
+                are often silent.
+            </p>
+
+            <p>
+                As a result, evaluation cannot live solely at the model level. Accuracy metrics, loss curves, and benchmarks capture only a narrow slice of system
+                behavior. What matters in practice is how components interact, how errors propagate, and how the system responds when assumptions are violated.
+            </p>
+
+            <p>
+                Evaluation, then, must be treated as a systems problem, spanning data, models, infrastructure, and human interfaces.
+            </p>
+
+            <h2>Metrics as Contracts</h2>
+
+            <p>
+                Metrics are often viewed as measurements, but in intelligent systems they function more like contracts. They encode what the system is optimizing for
+                and implicitly define what kinds of failures are acceptable.
+            </p>
+
+            <p>
+                Poorly chosen metrics create blind spots. A system may optimize the metric while degrading real-world performance, masking drift or reinforcing
+                unintended behavior. This is not a modeling failure so much as a specification failure.
+            </p>
+
+            <p>
+                Effective evaluation requires metrics that are aligned with system intent, stable under distribution shift, and interpretable by humans. When metrics
+                are treated as contracts rather than dashboards, they become tools for coordination and accountability across teams.
+            </p>
+
+            <h2>Observability Beyond Accuracy</h2>
+
+            <p>
+                Accuracy alone is rarely sufficient to understand system behavior. Intelligent systems fail in ways that are subtle, contextual, and temporally
+                correlated. A small degradation in one component can cascade into systemic failure elsewhere.
+            </p>
+
+            <p>
+                Observability provides the missing visibility. Logs, traces, and structured telemetry expose intermediate states, decision boundaries, and confidence
+                levels. They allow engineers to ask not just what the system did, but why.
+            </p>
+
+            <p>
+                Crucially, observability must be designed in from the start. Retrofitting instrumentation after deployment often reveals that the most important
+                signals were never captured. In this sense, observability is not an operational add-on, but a design constraint.
+            </p>
+
+            <h2>Offline vs. Online Evaluation</h2>
+
+            <p>
+                Offline evaluation offers control and repeatability. Datasets can be curated, metrics standardized, and regressions detected. However, offline
+                benchmarks are necessarily approximations of reality. They freeze assumptions that may no longer hold once the system interacts with the world.
+            </p>
+
+            <p>
+                Online evaluation exposes systems to real distributions, real users, and real feedback. It reveals failure modes that static datasets cannot capture,
+                but it introduces risk and noise. Changes must be carefully gated, and feedback loops must be managed to avoid reinforcing errors.
+            </p>
+
+            <p>
+                Reliable systems balance both. Offline evaluation establishes baselines and guardrails. Online evaluation validates behavior under real conditions.
+                Neither is sufficient alone.
+            </p>
+
+            <h2>Feedback Loops and Drift</h2>
+
+            <p>
+                Intelligent systems do not exist in isolation. They shape the environments they operate in, influencing the data they later consume. This creates
+                feedback loops that can amplify bias, reinforce errors, or gradually erode performance.
+            </p>
+
+            <p>
+                Evaluation must therefore account for temporal dynamics. A system that performs well today may degrade tomorrow as inputs shift, user behavior changes,
+                or upstream assumptions break. Detecting this requires continuous monitoring and a willingness to revisit earlier design decisions.
+            </p>
+
+            <p>
+                Drift is not a bug; it is a property of adaptive systems. The role of evaluation is to make drift visible and manageable rather than surprising.
+            </p>
+
+            <h2>Human Judgment as a Signal</h2>
+
+            <p>
+                Despite advances in automation, human judgment remains a critical evaluation signal. Humans excel at detecting ambiguity, contextual errors, and
+                misaligned intent. Incorporating human feedback into evaluation pipelines improves robustness, but it also introduces variability.
+            </p>
+
+            <p>
+                The challenge is to structure human input in ways that are scalable and actionable. Sampling strategies, review interfaces, and disagreement analysis
+                all matter. When done well, human-in-the-loop evaluation complements automated metrics rather than replacing them.
+            </p>
+
+            <p>
+                This reinforces a broader theme: intelligent systems are socio-technical systems. Evaluation must reflect both technical performance and human
+                expectations.
+            </p>
+
+            <h2>Reflections</h2>
+
+            <p>
+                What distinguishes reliable intelligent systems is not the absence of failure, but the presence of mechanisms for detecting and responding to failure.
+                Evaluation provides those mechanisms.
+            </p>
+
+            <p>
+                By treating evaluation as infrastructure rather than instrumentation, systems gain the ability to adapt without losing trust. Metrics become signals,
+                observability becomes insight, and feedback becomes a source of learning rather than noise.
+            </p>
+
+            <p>
+                In this framing, evaluation is not the end of the pipeline. It is the connective tissue that allows intelligent systems to evolve responsibly.
+            </p>
+
+            <h2>Open Questions</h2>
+
+            <p>
+                Several questions remain unresolved. How can evaluation frameworks adapt as system goals evolve? What metrics best capture user trust and system
+                reliability? How do we balance automated signals with human judgment at scale?
+            </p>
+
+            <p>
+                These questions sit at the intersection of machine learning, systems engineering, and human-computer interaction, and they will shape how intelligent
+                systems are built, deployed, and governed.
+            </p>
         </div>
     </section>
 
