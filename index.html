@@ -278,16 +278,9 @@
         }
 
         .about-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
             gap: 4rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .about-text {
-            text-align: left;
         }
 
         .about-text p {
@@ -295,14 +288,13 @@
             line-height: 1.8;
             margin-bottom: 1.5rem;
         }
-
         .glance-box {
             background: rgba(15, 20, 25, 0.8);
             border: 1px solid rgba(155, 27, 48, 0.2);
             border-radius: 12px;
             padding: 2rem;
             height: fit-content;
-            justify-self: center;
+            justify-self: end;
         }
 
         .glance-box h4 {
@@ -603,7 +595,8 @@
            RESPONSIVE DESIGN
            ============================================ */
         @media (max-width: 968px) {
-            .hero-content {
+            .hero-content,
+            .about-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -752,7 +745,8 @@
                     
                     <p>I work at the intersection of machine learning, systems engineering, and product development. My projects include building lightweight LLM implementations from scratch, developing evaluation and error analysis workflows, and creating full-stack applications that integrate LLM APIs, vector search, and structured data pipelines. I'm especially interested in building AI systems that are reliable, interpretable, and ready for real-world production use.</p>
 
-                    <p>Looking ahead, I'm interested in continuing to work on applied AI systems, with a focus on ML workflows, system reliability, and the engineering challenges of integrating intelligent agents into real products. I'm motivated by building thoughtful, scalable tools that balance technical rigor with strong user experience.<p>
+                    <p>Looking ahead, I'm interested in continuing to work on applied AI systems, with a focus on ML workflows, system reliability, and the engineering challenges of integrating intelligent agents into real products. I'm motivated by building thoughtful, scalable tools that balance technical rigor with strong user experience.</p>
+                </div>
                 <div class="about-sidebar">
                     <div class="glance-box">
                         <h4>At a Glance</h4>
