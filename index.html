@@ -398,6 +398,10 @@
             color: #c41e3a;
         }
 
+        .card-link-wrapper, .card-link-wrapper:hover {
+            text-decoration: none;
+        }
+
         /* ============================================
            EXPERIENCE SECTION
            ============================================ */
@@ -705,7 +709,7 @@
                 <div class="hero-left">
                     <h1>Natasha Akali</h1>
                     <p class="hero-tagline">Software Engineer specializing in AI-powered systems, machine learning workflows, and full-stack engineering.</p>
-                    <p class="hero-meta"> Ex-Microsoft · CS/IS, Carnegie Mellon</p>
+                    <p class="hero-meta"> Founder of Job Tracker · Ex-Microsoft · CS/IS, Carnegie Mellon</p>
                     <div class="btn-group">
                         <a href="#projects" class="btn btn-primary">View Projects</a>
                         <a href="Natasha_Akali_Resume_2025.pdf" class="btn btn-ghost" download>Download CV</a>
@@ -715,13 +719,13 @@
                     <div class="highlights-card">
                         <h4>Recent Highlights</h4>
                         <div class="highlight-item">
+                            <p>Founded and built Job Tracker, an AI-augmented platform that automatically ingests and processes unstructured email data to track job application states.</p>
+                        </div>
+                        <div class="highlight-item">
                             <p>Built an OpenAI-powered support agent processing 500+ tickets and surfacing customer trends.</p>
                         </div>
                         <div class="highlight-item">
-                            <p>Created Job Tracker tools to structure and analyze job-application workflows.</p>
-                        </div>
-                        <div class="highlight-item">
-                            <p>Designed AI-assisted tools for resumes and safe dining for celiac users.</p>
+                            <p>Designed and built Resume Assistant, an AI-powered tool that analyzes resumes against job descriptions.</p>
                         </div>
                     </div>
                 </div>
@@ -737,12 +741,11 @@
             <h2 class="section-title">About</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I'm a software engineer passionate about building AI-powered systems that solve real-world problems. My work spans from designing intelligent customer support agents to creating tools that help people make better decisions—whether that's navigating the job market or dining safely with dietary restrictions.</p>
+                    <p>I'm a software engineer focused on building AI-powered systems that solve real-world problems. My work spans designing intelligent support agents, developing ML-driven platforms, and creating tools that help people make better decisions, such as navigating the job market.</p>
                     
-                    <p>I thrive at the intersection of machine learning, systems engineering, and product development. My projects range from building lightweight LLM implementations from scratch to deploying full-stack applications that integrate OpenAI APIs, vector search, and custom ML pipelines. I'm driven by the challenge of making AI systems not just powerful, but reliable, interpretable, and genuinely useful.</p>
-                    
-                    <p>Looking ahead, I'm eager to pursue graduate-level work in AI systems, focusing on reliability, applied machine learning, and the engineering challenges of deploying intelligent agents at scale. I want to contribute to the next generation of AI tools that are both technically sophisticated and thoughtfully designed for their human users.</p>
-                </div>
+                    <p>I work at the intersection of machine learning, systems engineering, and product development. My projects include building lightweight LLM implementations from scratch, developing evaluation and error analysis workflows, and creating full-stack applications that integrate LLM APIs, vector search, and structured data pipelines. I'm especially interested in building AI systems that are reliable, interpretable, and ready for real-world production use.</p>
+
+                    <p>Looking ahead, I'm interested in continuing to work on applied AI systems, with a focus on ML workflows, system reliability, and the engineering challenges of integrating intelligent agents into real products. I'm motivated by building thoughtful, scalable tools that balance technical rigor with strong user experience.<p>
                 <div class="about-sidebar">
                     <div class="glance-box">
                         <h4>At a Glance</h4>
@@ -752,7 +755,7 @@
                         </div>
                         <div class="glance-item">
                             <strong>Interests</strong>
-                            <p>AI agents, applied ML, system design, security & reliability</p>
+                            <p>AI agents, applied machine learning, system design, security, and reliability</p>
                         </div>
                         <div class="glance-item">
                             <strong>Education</strong>
@@ -779,7 +782,20 @@
         <div class="container">
             <h2 class="section-title">Selected Projects</h2>
             <div class="cards-grid">
-                <!-- Project 1: Pocket-LLM -->
+                <!-- Project 1: Job Tracker -->
+                 <div class="card">
+                    <h3>Job Tracker</h3>
+                    <p class="card-subtitle">Python · GCP · Firestore · Gmail OAuth · LLMs · React</p>
+                    <ul>
+                        <li>Founded and built an AI-augmented job tracking platform that ingests Gmail data via OAuth and organizes application status automatically</li>
+                        <li>Designed event-driven pipelines on GCP (Python services + Firestore) for high-volume email ingestion, deduplication, and structured extraction</li>
+                        <li>Built evaluation + error analysis workflows to improve classification reliability, significantly reducing misclassification and hallucinations</li>
+                    </ul>
+                    <a href="mailto:nikki.akali@gmail.com?subject=Job%20Tracker%20Demo%20Request" class="card-link">Request demo →</a>
+                </div>
+
+
+                <!-- Project 2: Pocket-LLM -->
                 <div class="card">
                     <h3>Pocket-LLM</h3>
                     <p class="card-subtitle">Python · Transformers · Deep Learning</p>
@@ -791,17 +807,6 @@
                     <a href="https://github.com/nikkiakali" class="card-link">View Code →</a>
                 </div>
 
-                <!-- Project 2: Job Tracker -->
-                <div class="card">
-                    <h3>Job Tracker</h3>
-                    <p class="card-subtitle">JavaScript · Chrome APIs · Webhooks</p>
-                    <ul>
-                        <li>Chrome extension for tracking job applications with one-click saving, CSV export, and webhook integration</li>
-                        <li>Automatically extracts application metadata from job posting pages and organizes into structured format</li>
-                        <li>Enables AI enrichment pipeline via webhook—sending application data to external systems for analysis and insights</li>
-                    </ul>
-                    <a href="https://github.com/nikkiakali" class="card-link">View Code →</a>
-                </div>
 
                 <!-- Project 3: Resume Assistant -->
                 <div class="card">
@@ -811,18 +816,6 @@
                         <li>AI-powered tool that tailors resumes to specific job descriptions using GPT models</li>
                         <li>Parses resume content, analyzes job requirements, and rewrites sections to highlight relevant experience</li>
                         <li>Full-stack application with React frontend for document editing and Python backend for LLM integration</li>
-                    </ul>
-                    <a href="https://github.com/nikkiakali" class="card-link">View Code →</a>
-                </div>
-
-                <!-- Project 4: Celiac Disease Dining Companion -->
-                <div class="card">
-                    <h3>Celiac Disease Dining Companion</h3>
-                    <p class="card-subtitle">Python · React · LLMs · Vector Similarity</p>
-                    <ul>
-                        <li>Cross-platform app helping celiac users track symptoms and discover safer restaurant options</li>
-                        <li>Uses LLM-based risk analysis to evaluate menu items and ingredient lists for gluten contamination</li>
-                        <li>Vector similarity search over symptom logs and dining history to personalize recommendations and identify triggers</li>
                     </ul>
                     <a href="https://github.com/nikkiakali" class="card-link">View Code →</a>
                 </div>
@@ -838,28 +831,36 @@
             <h2 class="section-title">Thinking & Notes</h2>
             <div class="cards-grid">
                 <!-- Note 1 -->
-                <div class="card">
-                    <h3>Designing Reliable LLM Agents for Customer Support</h3>
-                    <p>Lessons learned from building production support agents: how careful prompt structuring, tool design, and error handling separate functional prototypes from reliable systems. Explores the tradeoffs between agent autonomy and predictability, and why failure modes matter as much as success metrics.</p>
-                </div>
+                <a href="notes/note1.html" class="card-link-wrapper">
+                    <div class="card">
+                        <h3>Designing Reliable LLM Agents for Customer Support</h3>
+                        <p>Lessons learned from building production support agents: how careful prompt structuring, tool design, and error handling separate functional prototypes from reliable systems. Explores the tradeoffs between agent autonomy and predictability, and why failure modes matter as much as success metrics.</p>
+                    </div>
+                </a>
 
                 <!-- Note 2 -->
-                <div class="card">
-                    <h3>Structuring Job-Application Data from Messy Email Streams</h3>
-                    <p>Thoughts on extracting signal from unstructured application workflows. Using domain heuristics, status classification, and strategic LLM calls to transform chaotic email threads into structured data. When to lean on rules-based systems versus when to trust language models.</p>
-                </div>
+                <a href="notes/note2.html" class="card-link-wrapper">
+                    <div class="card">
+                        <h3>Structuring Job-Application Data from Messy Email Streams</h3>
+                        <p>Thoughts on extracting signal from unstructured application workflows. Using domain heuristics, status classification, and strategic LLM calls to transform chaotic email threads into structured data. When to lean on rules-based systems versus when to trust language models.</p>
+                    </div>
+                </a>
 
                 <!-- Note 3 -->
-                <div class="card">
-                    <h3>AI for Safer Dining with Celiac Disease</h3>
-                    <p>Exploring how symptom logging, embeddings, and semantic search can reduce risk for people with celiac disease. The challenge of building trust in AI recommendations when mistakes have real health consequences. Combining structured data with LLM-based reasoning to surface patterns humans might miss.</p>
-                </div>
+                <a href="notes/note3.html" class="card-link-wrapper">
+                    <div class="card">
+                        <h3>AI for Safer Dining with Celiac Disease</h3>
+                        <p>Exploring how symptom logging, embeddings, and semantic search can reduce risk for people with celiac disease. The challenge of building trust in AI recommendations when mistakes have real health consequences. Combining structured data with LLM-based reasoning to surface patterns humans might miss.</p>
+                    </div>
+                </a>
 
                 <!-- Note 4 -->
-                <div class="card">
-                    <h3>Building Lightweight ML Tools for Personal Use</h3>
-                    <p>Why building tools for yourself is one of the best ways to learn. Reflections on implementing transformers from scratch, designing chrome extensions, and integrating OpenAI APIs—small projects that teach systems thinking, API design, and what it takes to ship something functional.</p>
-                </div>
+                <a href="notes/note4.html" class="card-link-wrapper">
+                    <div class="card">
+                        <h3>Building Lightweight ML Tools for Personal Use</h3>
+                        <p>Why building tools for yourself is one of the best ways to learn. Reflections on implementing transformers from scratch, designing chrome extensions, and integrating OpenAI APIs—small projects that teach systems thinking, API design, and what it takes to ship something functional.</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -874,9 +875,9 @@
                 <!-- Experience 1: Microsoft -->
                 <div class="experience-item">
                     <div class="experience-header">
-                        <h3>Customer Success Account Manager</h3>
+                        <h3>Account Manager</h3>
                         <p class="experience-meta">
-                            <span class="experience-company">Microsoft</span> · Redmond, WA · 2024 – Present
+                            <span class="experience-company">Microsoft</span> · Redmond, WA · 2024 – 2025
                         </p>
                     </div>
                     <ul>
@@ -900,12 +901,12 @@
                     </ul>
                 </div>
                 
-                <!-- Experience 3: Highmark Health -->
+                <!-- Experience 3: Delta Dental -->
                 <div class="experience-item">
                     <div class="experience-header">
                         <h3>Software Engineer Intern</h3>
                         <p class="experience-meta">
-                            <span class="experience-company">Highmark Health</span> · Pittsburgh, PA · Summer 2023
+                            <span class="experience-company">Delta Dental of Michigan</span> · Okemos, MI · Summer 2023
                         </p>
                     </div>
                     <ul>
@@ -914,12 +915,12 @@
                     </ul>
                 </div>
                 
-                <!-- Experience 4: PNC -->
+                <!-- Experience 4: SecureVia -->
                 <div class="experience-item">
                     <div class="experience-header">
-                        <h3>Security Analyst Intern</h3>
+                        <h3>Software Engineer Intern</h3>
                         <p class="experience-meta">
-                            <span class="experience-company">PNC</span> · Pittsburgh, PA · Summer 2022
+                            <span class="experience-company">SecureVia</span> · Boston, MA · Summer 2022
                         </p>
                     </div>
                     <ul>
