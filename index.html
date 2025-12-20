@@ -69,8 +69,6 @@
         }
 
         a:hover {
-            color: #c41e3a;
-            text-decoration: underline;
         }
 
         /* ============================================
@@ -146,6 +144,7 @@
         .navbar-nav a:hover {
             color: #9b1b30;
             border-bottom-color: #9b1b30;
+            text-decoration: underline;
         }
 
         .navbar-nav a.nav-link--active {
@@ -328,6 +327,10 @@
             font-size: 0.9rem;
         }
 
+        .glance-links a:hover {
+            text-decoration: underline;
+        }
+
         /* ============================================
            CARDS (Projects, Experience, Notes)
            ============================================ */
@@ -346,16 +349,23 @@
             transition: all 0.3s ease;
         }
 
-        .card:hover {
+        .card--clickable:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 24px rgba(155, 27, 48, 0.2);
             border-color: rgba(155, 27, 48, 0.4);
+            cursor: pointer;
+        }
+
+        .card--clickable:hover h3 {
+            color: #9b1b30;
+            text-decoration: underline;
         }
 
         .card h3 {
             color: #f5f5f7;
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
+            text-decoration: none;
         }
 
         .card-subtitle {
@@ -396,10 +406,7 @@
 
         .card-link:hover {
             color: #c41e3a;
-        }
-
-        .card-link-wrapper, .card-link-wrapper:hover {
-            text-decoration: none;
+            text-decoration: underline;
         }
 
         /* ============================================
@@ -431,8 +438,6 @@
         }
 
         .experience-item:hover {
-            transform: translateX(8px);
-            border-color: rgba(155, 27, 48, 0.4);
         }
 
         .experience-header {
@@ -516,9 +521,6 @@
         }
 
         .skill-tag:hover {
-            background: rgba(155, 27, 48, 0.2);
-            border-color: rgba(155, 27, 48, 0.5);
-            transform: translateY(-2px);
         }
 
         /* ============================================
@@ -589,6 +591,7 @@
 
         .footer-links a:hover {
             color: #9b1b30;
+            text-decoration: underline;
         }
 
         /* ============================================
@@ -832,24 +835,24 @@
             <h2 class="section-title">Thinking & Notes</h2>
             <div class="cards-grid">
                 <!-- Note 1 -->
-                <a href="notes/note1.html" class="card-link-wrapper">
-                    <div class="card">
+                <a href="notes/note1.html">
+                    <div class="card card--clickable">
                         <h3>Reliable LLM Agents</h3>
                         <p>A structured approach to building reliable LLM agents, using LLM compilers as a guiding abstraction. Explores how intermediate representations, verification layers, and constrained execution bridge the gap between generative models and production-grade systems.</p>
                     </div>
                 </a>
 
                 <!-- Note 2 -->
-                <a href="notes/note2.html" class="card-link-wrapper">
-                    <div class="card">
+                <a href="notes/note2.html">
+                    <div class="card card--clickable">
                         <h3>The Semantic Layer</h3>
                         <p>A reflection on the semantic layer as the missing abstraction between raw data and decision-making. Explores how shared metrics, governed definitions, and meaning-aware interfaces enable consistency across analytics, applications, and AI systems.</p>
                     </div>
                 </a>
 
                 <!-- Note 3 -->
-                <a href="notes/note3.html" class="card-link-wrapper">
-                    <div class="card">
+                <a href="notes/note3.html">
+                    <div class="card card--clickable">
                         <h3>Evaluating Intelligent Systems</h3>
                         <p>An exploration of evaluation as a core systems concern. Examines how metrics, observability, and human feedback shape reliability, detect drift, and enable intelligent systems to evolve without losing trust.</p>
                     </div>
