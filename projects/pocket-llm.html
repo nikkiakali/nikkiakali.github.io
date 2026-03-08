@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket-LLM | Natasha Akali</title>
+    <meta name="description" content="Tiny GPT-style language model built from scratch with custom tokenization, transformer training, and inference workflows.">
+
+    <style>
+        /* ============================================
+           RESET & GLOBAL STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
+            color: #e8e9ed;
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: 0.02em;
+            font-weight: 600;
+            color: #f5f5f7;
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 5vw + 1rem, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            color: #c4c4c9;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: #9b1b30;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           LAYOUT UTILITIES
+           ============================================ */
+        .container {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #9b1b30;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            margin-bottom: 1.25rem;
+        }
+
+        .section-text {
+            color: #c4c4c9;
+            max-width: 780px;
+            font-size: 1rem;
+            line-height: 1.85;
+        }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, rgba(15, 20, 25, 0.9) 0%, rgba(26, 31, 46, 0.8) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(155, 27, 48, 0.2);
+            padding: 1rem 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f5f5f7;
+            text-decoration: none;
+        }
+
+        .nav-back {
+            color: #c4c4c9;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.35rem;
+        }
+
+        .nav-back:hover {
+            color: #9b1b30;
+            border-bottom-color: #9b1b30;
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero {
+            padding: 6rem 0 4rem;
+        }
+
+        .hero h1 {
+            background: linear-gradient(135deg, #f5f5f7 0%, #c4c4c9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            max-width: 800px;
+        }
+
+        .hero-desc {
+            font-size: 1.3rem;
+            color: #c4c4c9;
+            max-width: 800px;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.98rem;
+        }
+
+        .btn-primary {
+            background: #9b1b30;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #b32338;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(155, 27, 48, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 2px solid #9b1b30;
+            color: #9b1b30;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(155, 27, 48, 0.1);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tech-tag {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            color: #c4c4c9;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.88rem;
+        }
+
+        /* ============================================
+           CARDS
+           ============================================ */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(155, 27, 48, 0.12);
+            border-color: rgba(155, 27, 48, 0.35);
+        }
+
+        .card p {
+            margin: 0;
+            color: #c4c4c9;
+            font-size: 0.96rem;
+            line-height: 1.75;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .card ul li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.25rem;
+            position: relative;
+            color: #c4c4c9;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .card ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #9b1b30;
+            font-weight: bold;
+        }
+
+        /* ============================================
+           ARCHITECTURE DIAGRAM
+           ============================================ */
+        .diagram-wrap {
+            margin-top: 2rem;
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+        }
+
+        .arch-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0;
+            min-width: max-content;
+        }
+
+        .arch-node {
+            background: rgba(15, 20, 25, 0.8);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            min-width: 170px;
+            text-align: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .arch-node:hover {
+            border-color: rgba(155, 27, 48, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .arch-node strong {
+            display: block;
+            color: #f5f5f7;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .arch-node span {
+            display: block;
+            font-size: 0.82rem;
+            color: #8a8a8f;
+            line-height: 1.5;
+        }
+
+        .arch-arrow {
+            color: #9b1b30;
+            font-size: 1.4rem;
+            font-weight: 600;
+            padding: 0 0.9rem;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        /* ============================================
+           HIGHLIGHT BOX
+           ============================================ */
+        .highlight-box {
+            background: rgba(155, 27, 48, 0.08);
+            border: 1px solid rgba(155, 27, 48, 0.22);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .highlight-box p {
+            color: #e8e9ed;
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.85;
+        }
+
+        /* ============================================
+           CODE BLOCK STYLE
+           ============================================ */
+        .inline-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .meta-item {
+            background: rgba(15, 20, 25, 0.8);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .meta-item strong {
+            display: block;
+            color: #f5f5f7;
+            font-size: 0.9rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .meta-item span {
+            color: #8a8a8f;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: rgba(15, 20, 25, 0.9);
+            border-top: 1px solid rgba(155, 27, 48, 0.2);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            color: #8a8a8f;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 968px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 0 3rem;
+            }
+
+            .hero-desc {
+                font-size: 1.12rem;
+            }
+
+            .arch-diagram {
+                flex-direction: column;
+                align-items: stretch;
+                min-width: unset;
+            }
+
+            .arch-node {
+                width: 100%;
+            }
+
+            .arch-arrow {
+                transform: rotate(90deg);
+                text-align: center;
+                padding: 0.4rem 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            h1 {
+                font-size: 2.4rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .hero-desc {
+                font-size: 1.05rem;
+            }
+
+            .nav-back {
+                font-size: 0.88rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* ============================================
+           ACCESSIBILITY
+           ============================================ */
+        *:focus {
+            outline: 2px solid #9b1b30;
+            outline-offset: 2px;
+        }
+
+        a:focus {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         NAVBAR
+         ============================================ -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand">Natasha Akali</a>
+            <a href="../index.html#projects" class="nav-back">← Back to Projects</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- ============================================
+             HERO
+             ============================================ -->
+        <section class="hero">
+            <div class="container">
+                <h1>Pocket-LLM</h1>
+                <p class="hero-desc">
+                    Tiny GPT-style language model built from scratch to make transformer internals, tokenization, training, and inference concrete through implementation rather than abstraction.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="https://github.com/nikkiakali/pocket-llm" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Repository</a>
+                    <a href="https://github.com/nikkiakali/pocket-llm#readme" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">View README</a>
+                </div>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">NumPy</span>
+                    <span class="tech-tag">PyYAML</span>
+                    <span class="tech-tag">Regex</span>
+                    <span class="tech-tag">Transformer Architecture</span>
+                </div>
+
+                <div class="inline-meta">
+                    <div class="meta-item">
+                        <strong>Focus</strong>
+                        <span>Tokenizer, transformer, training, inference, and CPU-friendly experimentation</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Repository Structure</strong>
+                        <span>Modular Python package with CLI entry points, config-driven runs, tests, and sample outputs</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Goal</strong>
+                        <span>Understand core model mechanics deeply while keeping small models usable in lightweight settings</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SYSTEM OVERVIEW
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">System Overview</p>
+                <h2 class="section-title">Learning the Stack by Building the Stack</h2>
+                <p class="section-text">
+                    Pocket-LLM is a compact GPT-style language model implementation built from first principles. Rather than treating large language models as black-box APIs, the project rebuilds the full loop directly in code: tokenization, model definition, training, checkpointing, and inference.
+                </p>
+                <p class="section-text" style="margin-top: 1rem;">
+                    The system supports both character-level and BPE-based workflows, enabling direct comparison between simpler baselines and more practical tokenization strategies. The result is not just a toy model, but a controlled environment for understanding how model architecture, tokenizer choice, data scale, and runtime constraints interact.
+                </p>
+            </div>
+        </section>
+
+        <!-- ============================================
+             ARCHITECTURE
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">Architecture</p>
+                <h2 class="section-title">Training and Inference Pipeline</h2>
+
+                <div class="diagram-wrap">
+                    <div class="arch-diagram">
+                        <div class="arch-node">
+                            <strong>Text Corpus</strong>
+                            <span>Tiny Shakespeare and other small datasets</span>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-node">
+                            <strong>Tokenization</strong>
+                            <span>Character-level or BPE vocabulary construction</span>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-node">
+                            <strong>Training Pipeline</strong>
+                            <span>Config-driven loops, checkpointing, and evaluation</span>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-node">
+                            <strong>Transformer Model</strong>
+                            <span>Custom GPT-style architecture in PyTorch</span>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-node">
+                            <strong>Inference CLI</strong>
+                            <span>Prompted text generation from trained checkpoints</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             IMPLEMENTATION DETAILS
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">Implementation</p>
+                <h2 class="section-title">What the Project Actually Includes</h2>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>Custom Tokenization Paths</h3>
+                        <p>
+                            The repository supports both character-level tokenization and BPE-based tokenization. This makes it possible to study how vocabulary granularity affects compression, sample quality, and training behavior across small model sizes.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Modular Model Code</h3>
+                        <p>
+                            Core components are separated into focused modules for tokenizers, model definition, training, and inference. That structure makes the implementation easier to reason about, extend, and test without turning the project into a monolith.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Config-Driven Training</h3>
+                        <p>
+                            YAML-based configs define training runs such as <code>small_bpe</code>, <code>tiny_bpe</code>, and <code>tiny_char</code>. This keeps experimentation reproducible and makes model-size or tokenizer changes easier to compare systematically.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             ENGINEERING CHALLENGES
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">Engineering Challenges</p>
+                <h2 class="section-title">Tradeoffs Beneath the Surface</h2>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>Simplicity vs. Fidelity</h3>
+                        <p>
+                            Building a model from scratch is valuable only if the implementation remains understandable. A central challenge was keeping the code compact enough for learning while still preserving the essential mechanics of modern autoregressive transformers.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Tokenization Strategy</h3>
+                        <p>
+                            Character-level models are conceptually simple but inefficient, while BPE adds complexity in exchange for better token efficiency and output quality. Supporting both paths made the tradeoff visible rather than theoretical.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Resource Constraints</h3>
+                        <p>
+                            The project was designed to be CPU-friendly for fast experimentation, but also flexible enough to scale to better quality runs when more compute is available. That required deliberate choices around model size, configs, and training workflow.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             DESIGN PRINCIPLES
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">Design Principles</p>
+                <h2 class="section-title">How the Project Was Shaped</h2>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>Learn by Rebuilding</h3>
+                        <p>
+                            The fastest way to internalize model behavior is to implement the components directly. Tokenization, attention, training loops, and sampling become much clearer when each layer is explicit and debuggable.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Optimize for Understanding</h3>
+                        <p>
+                            The project favors clarity of system boundaries over unnecessary abstraction. The goal is not to mimic a production framework, but to make each stage of the model lifecycle visible and inspectable.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Make Experimentation Cheap</h3>
+                        <p>
+                            Small, configurable runs reduce friction. When it is easy to swap configs, tokenizer choices, or checkpoints, iteration becomes fast enough to support real intuition rather than one-off experiments.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             WHY IT MATTERS
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">Outcome</p>
+                <h2 class="section-title">Why This Project Matters</h2>
+
+                <div class="highlight-box">
+                    <p>
+                        Pocket-LLM turns transformer concepts into working software. It bridges the gap between reading about tokenizers, autoregressive generation, checkpoints, and training loops and actually understanding how those pieces cooperate in practice. That foundation matters well beyond small models: engineers building LLM-powered systems make better decisions when they understand what the model is doing underneath the API surface.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             REPOSITORY CONTENT
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">Repository Highlights</p>
+                <h2 class="section-title">Practical Features</h2>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>CLI-Based Workflow</h3>
+                        <ul>
+                            <li>Train BPE and character-level models from the command line</li>
+                            <li>Run inference directly from saved checkpoints</li>
+                            <li>Keep workflows lightweight and reproducible</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Readable Outputs</h3>
+                        <ul>
+                            <li>Generated text samples are saved as human-readable artifacts</li>
+                            <li>Different runs can be compared side by side</li>
+                            <li>Quality changes are easy to inspect qualitatively</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Testing and Structure</h3>
+                        <ul>
+                            <li>Includes smoke tests, tokenizer checks, and sampling validation</li>
+                            <li>Organized as a Python package rather than a single script</li>
+                            <li>Keeps experimentation grounded in maintainable engineering practice</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Natasha Akali. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
