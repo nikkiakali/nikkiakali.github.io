@@ -1,1 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker | Natasha Akali</title>
+    <meta name="description" content="AI-augmented system that transforms unstructured job-related email activity into structured application workflow events.">
 
+    <style>
+        /* ============================================
+           RESET & GLOBAL STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
+            color: #e8e9ed;
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: 0.02em;
+            font-weight: 600;
+            color: #f5f5f7;
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 5vw + 1rem, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            color: #c4c4c9;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: #9b1b30;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* ============================================
+           LAYOUT UTILITIES
+           ============================================ */
+        .container {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #9b1b30;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            margin-bottom: 1.25rem;
+        }
+
+        .section-text {
+            color: #c4c4c9;
+            max-width: 760px;
+            font-size: 1rem;
+            line-height: 1.85;
+        }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, rgba(15, 20, 25, 0.9) 0%, rgba(26, 31, 46, 0.8) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(155, 27, 48, 0.2);
+            padding: 1rem 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f5f5f7;
+            text-decoration: none;
+        }
+
+        .nav-back {
+            color: #c4c4c9;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.35rem;
+        }
+
+        .nav-back:hover {
+            color: #9b1b30;
+            border-bottom-color: #9b1b30;
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero {
+            padding: 6rem 0 4rem;
+        }
+
+        .hero h1 {
+            background: linear-gradient(135deg, #f5f5f7 0%, #c4c4c9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            max-width: 800px;
+        }
+
+        .hero-desc {
+            font-size: 1.3rem;
+            color: #c4c4c9;
+            max-width: 760px;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tech-tag {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            color: #c4c4c9;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.88rem;
+        }
+
+        /* ============================================
+           CARDS
+           ============================================ */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(155, 27, 48, 0.12);
+            border-color: rgba(155, 27, 48, 0.35);
+        }
+
+        .card p {
+            margin: 0;
+            color: #c4c4c9;
+            font-size: 0.96rem;
+            line-height: 1.75;
+        }
+
+        /* ============================================
+           ARCHITECTURE DIAGRAM
+           ============================================ */
+        .diagram-wrap {
+            margin-top: 2rem;
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+        }
+
+        .arch-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0;
+            min-width: max-content;
+        }
+
+        .arch-node {
+            background: rgba(15, 20, 25, 0.8);
+            border: 1px solid rgba(155, 27, 48, 0.2);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            min-width: 160px;
+            text-align: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .arch-node:hover {
+            border-color: rgba(155, 27, 48, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .arch-node strong {
+            display: block;
+            color: #f5f5f7;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .arch-node span {
+            display: block;
+            font-size: 0.82rem;
+            color: #8a8a8f;
+            line-height: 1.5;
+        }
+
+        .arch-arrow {
+            color: #9b1b30;
+            font-size: 1.4rem;
+            font-weight: 600;
+            padding: 0 0.9rem;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        /* ============================================
+           OUTCOME BOX
+           ============================================ */
+        .outcome-box {
+            background: rgba(155, 27, 48, 0.08);
+            border: 1px solid rgba(155, 27, 48, 0.22);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .outcome-box p {
+            color: #e8e9ed;
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.85;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: rgba(15, 20, 25, 0.9);
+            border-top: 1px solid rgba(155, 27, 48, 0.2);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            color: #8a8a8f;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 968px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 0 3rem;
+            }
+
+            .hero-desc {
+                font-size: 1.12rem;
+            }
+
+            .arch-diagram {
+                flex-direction: column;
+                align-items: stretch;
+                min-width: unset;
+            }
+
+            .arch-node {
+                width: 100%;
+            }
+
+            .arch-arrow {
+                transform: rotate(90deg);
+                text-align: center;
+                padding: 0.4rem 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            h1 {
+                font-size: 2.4rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .hero-desc {
+                font-size: 1.05rem;
+            }
+
+            .nav-back {
+                font-size: 0.88rem;
+            }
+        }
+
+        /* ============================================
+           ACCESSIBILITY
+           ============================================ */
+        *:focus {
+            outline: 2px solid #9b1b30;
+            outline-offset: 2px;
+        }
+
+        a:focus {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         NAVBAR
+         ============================================ -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand">Natasha Akali</a>
+            <a href="../index.html#projects" class="nav-back">← Back to Projects</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- ============================================
+             HERO
+             ============================================ -->
+        <section class="hero">
+            <div class="container">
+                <h1>Job Tracker</h1>
+                <p class="hero-desc">
+                    AI-augmented system that transforms unstructured job-related email activity into structured application workflow events.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">GCP</span>
+                    <span class="tech-tag">Firestore</span>
+                    <span class="tech-tag">Gmail OAuth</span>
+                    <span class="tech-tag">LLMs</span>
+                    <span class="tech-tag">React</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SYSTEM OVERVIEW
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">System Overview</p>
+                <h2 class="section-title">From Inbox Noise to Structured Signal</h2>
+                <p class="section-text">
+                    Job-related communication is inherently unstructured. Confirmation emails, recruiter follow-ups, rejection notices, and scheduling links arrive across threads with no consistent format. This system ingests that raw email activity, extracts meaningful signals, and maps them to discrete workflow events — application submitted, interview scheduled, offer received — producing a reliable, queryable timeline of each application's lifecycle.
+                </p>
+                <p class="section-text" style="margin-top: 1rem;">
+                    The result is a structured event stream that powers a dashboard where application state remains current without manual data entry.
+                </p>
+            </div>
+        </section>
+
+        <!-- ============================================
+             ARCHITECTURE
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">Architecture</p>
+                <h2 class="section-title">High-Level Data Flow</h2>
+
+                <div class="diagram-wrap">
+                    <div class="arch-diagram">
+                        <div class="arch-node">
+                            <strong>Email Sources</strong>
+                            <span>Gmail via OAuth</span>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-node">
+                            <strong>Ingestion Pipeline</strong>
+                            <span>Fetch and normalize</span>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-node">
+                            <strong>Signal Extraction</strong>
+                            <span>LLM classification</span>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-node">
+                            <strong>Event Store</strong>
+                            <span>Firestore</span>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-node">
+                            <strong>User Dashboard</strong>
+                            <span>React frontend</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             ENGINEERING CHALLENGES
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">Engineering Challenges</p>
+                <h2 class="section-title">Hard Problems Worth Solving</h2>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>Unstructured Inputs</h3>
+                        <p>
+                            Emails vary widely in format, quoting patterns, and threading conventions. The ingestion layer must normalize this variance before downstream processing can operate reliably.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Event Deduplication</h3>
+                        <p>
+                            Multiple email threads may reference the same underlying job update. The system must resolve these into singular, canonical events to avoid polluting application state.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Reliable Classification</h3>
+                        <p>
+                            AI-driven extraction must remain stable across different companies, recruiter styles, and phrasing variations — producing consistent event types from inconsistent inputs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             DESIGN PRINCIPLES
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">Design Principles</p>
+                <h2 class="section-title">System Design Philosophy</h2>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>Event-Driven Architecture</h3>
+                        <p>
+                            Application state does not live as a single mutable record. It emerges from a stream of extracted events, making the system's history reconstructable and auditable.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Recoverable Automation</h3>
+                        <p>
+                            Automated signals should always be reversible. Extraction decisions can be reviewed and corrected, ensuring human oversight remains possible at every stage.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Observability First</h3>
+                        <p>
+                            Extraction pipelines surface granular signals for debugging and evaluation. When classification quality drifts, the system exposes it instead of silently degrading.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             OUTCOME
+             ============================================ -->
+        <section class="section">
+            <div class="container">
+                <p class="section-label">Outcome</p>
+                <h2 class="section-title">Why It Matters</h2>
+
+                <div class="outcome-box">
+                    <p>
+                        Most people manage job searches through mental bookkeeping or fragile spreadsheets. By treating email as a data source rather than only a reading interface, this system converts a chaotic, high-stakes process into a structured, observable workflow. The pattern generalizes beyond job tracking — any domain where asynchronous communication drives state changes can benefit from the same architectural approach.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Natasha Akali. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
