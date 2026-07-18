@@ -4,328 +4,188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Semantic Layer | Natasha Akali</title>
-    <style>
-        /* ============================================
-           RESET & GLOBAL STYLES
-           ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
-            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
-            color: #e8e9ed;
-            line-height: 1.7;
-            font-size: 16px;
-            overflow-x: hidden;
-        }
-
-        /* ============================================
-           TYPOGRAPHY
-           ============================================ */
-        h1, h2, h3, h4, h5, h6 {
-            letter-spacing: 0.02em;
-            font-weight: 600;
-            color: #f5f5f7;
-        }
-
-        h1 {
-            font-size: clamp(2.25rem, 5vw + 1rem, 3.5rem);
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        /* For essay sections */
-        h2 {
-            font-size: 1.9rem;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-        }
-
-        h4 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-        }
-
-        p {
-            color: #c4c4c9;
-            margin-bottom: 1.25rem;
-            font-size: 1.05rem;
-        }
-
-        a {
-            color: #9b1b30;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        a:hover {
-            color: #c41e3a;
-            text-decoration: underline;
-        }
-
-        /* ============================================
-           LAYOUT UTILITIES
-           ============================================ */
-        .container {
-            max-width: 1040px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section {
-            padding: 6rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: #9b1b30;
-            margin: 1rem auto 0;
-        }
-
-        /* ============================================
-           NAVBAR
-           ============================================ */
-        .navbar {
-            position: sticky;
-            top: 0;
-            background: linear-gradient(135deg, rgba(15, 20, 25, 0.9) 0%, rgba(26, 31, 46, 0.8) 100%);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(155, 27, 48, 0.2);
-            padding: 1rem 0;
-            z-index: 1000;
-        }
-
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-brand {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #f5f5f7;
-            text-decoration: none;
-        }
-
-        .navbar-nav {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .navbar-nav a {
-            position: relative;
-            color: #c4c4c9;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
-            padding-bottom: 0.5rem;
-        }
-
-        .navbar-nav a:hover {
-            color: #9b1b30;
-            border-bottom-color: #9b1b30;
-        }
-
-        .navbar-nav a.nav-link--active {
-            color: #9b1b30;
-            border-bottom-color: #9b1b30;
-        }
-
-        /* ============================================
-           NOTE / ESSAY LAYOUT
-           ============================================ */
-        .note-container {
-            max-width: 800px;
-        }
-
-        .note-meta {
-            color: #9aa0a6;
-            font-size: 0.95rem;
-            margin-bottom: 2.75rem;
-        }
-    </style>
+    <script>
+        (function () {
+            var stored = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = stored === 'dark' || stored === 'light'
+                ? stored
+                : (prefersDark ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/site.css">
 </head>
-
 <body>
-    <!-- ============================================
-         NAVBAR
-         ============================================ -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="/#home" class="navbar-brand">Natasha Akali</a>
-            <ul class="navbar-nav">
-                <li><a href="/#home">Home</a></li>
-                <li><a href="/#about">About</a></li>
-                <li><a href="/#projects">Projects</a></li>
-                <li><a href="/#thinking" class="nav-link--active">Thinking</a></li>
-                <li><a href="/#experience">Experience</a></li>
-                <li><a href="/#resume">Resume</a></li>
-                <li><a href="/#contact">Contact</a></li>
-            </ul>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header class="site-header">
+        <div class="shell site-header-inner">
+            <a href="../index.html" class="site-brand">Natasha Akali</a>
+            <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav-panel">Menu</button>
+            <div id="site-nav-panel" class="site-header-end">
+                <nav aria-label="Primary">
+                    <ul class="site-nav">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="index.html" aria-current="page">Notes</a></li>
+                        <li><a href="../work/index.html">Work</a></li>
+                        <li><a href="../experience.html">Experience</a></li>
+                        <li><a href="mailto:nikki.akali@gmail.com">Contact</a></li>
+                    </ul>
+                </nav>
+                <button type="button" class="theme-switch" role="switch" aria-checked="false" aria-label="Use dark mode">
+                    <span class="theme-switch-icons" aria-hidden="true">
+                        <svg class="theme-icon theme-icon--sun" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                        <svg class="theme-icon theme-icon--moon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </span>
+                    <span class="theme-switch-thumb" aria-hidden="true"></span>
+                </button>
+            </div>
         </div>
-    </nav>
-
-    <!-- ============================================
-         NOTE CONTENT SECTION
-         ============================================ -->
-    <section id="note" class="section">
-        <div class="container note-container">
+    </header>
+    <main id="main" class="reading">
+        <div class="shell reading-layout">
+            <a href="index.html" class="page-back">&larr; Notes</a>
+            <article class="essay">
             <h1>The Semantic Layer</h1>
-            <div class="note-meta">Thoughts on meaning, metrics, and enterprise-scale consistency</div>
-
-            <p>
-                Modern data systems are remarkably good at storing and processing information. They are far less good at preserving meaning.
-            </p>
-
-            <p>
-                As organizations scale, data proliferates across warehouses, services, dashboards, and applications. Tables multiply, pipelines branch,
-                and metrics are redefined in subtle ways by different teams. Over time, the same question asked in two different places can yield two
-                different answers, each technically correct within its own local context. The problem is not a lack of data or computation, but a lack
-                of shared semantics.
-            </p>
-
-            <p>
-                The semantic layer emerges as a response to this failure mode. It is not a visualization tool or a modeling convenience, but a systems
-                abstraction: a deliberate boundary between raw data and interpretation.
-            </p>
-
-            <h2>Data Without Semantics Is Not Reusable</h2>
-
-            <p>
-                Raw data systems optimize for storage efficiency, query performance, and schema evolution. These are necessary concerns, but they do not
-                address how humans and applications understand the data. Columns encode facts, but meaning lives elsewhere: in tribal knowledge,
-                documentation, and business logic scattered across codebases.
-            </p>
-
-            <p>
-                Without an explicit semantic layer, meaning is re-encoded repeatedly in analytics queries, application logic, ML feature pipelines, and
-                dashboards and reports. Each re-encoding is a chance for drift. Metrics begin to fragment, definitions subtly diverge, and confidence
-                erodes. Teams stop asking whether a number is correct and start asking which version of the number they are looking at.
-            </p>
-
-            <p>
-                This fragmentation is not accidental. It is the natural outcome of systems that treat semantics as an emergent property rather than a
-                first-class artifact.
-            </p>
-
-            <h2>The Semantic Layer as an Abstraction Boundary</h2>
-
-            <p>
-                The semantic layer formalizes meaning. It defines metrics, entities, relationships, and constraints in a shared, governed interface that
-                sits between data infrastructure and consumers.
-            </p>
-
-            <p>
-                From a systems perspective, it plays a role similar to an API or an intermediate representation. It abstracts over physical schemas and
-                storage details, provides stable contracts to downstream consumers, and centralizes logic that would otherwise be duplicated. The key
-                insight is that semantics should not be inferred at query time. They should be declared once and reused everywhere.
-            </p>
-
-            <p>
-                When done well, the semantic layer becomes the single place where definitions live. Changes to business logic propagate consistently.
-                Consumers stop re-implementing interpretation logic and instead rely on a shared vocabulary.
-            </p>
-
-            <h2>Consistency as a System Property</h2>
-
-            <p>
-                At scale, consistency is not achieved by coordination alone. It is achieved through structure.
-            </p>
-
-            <p>
-                The semantic layer enforces consistency by constraining how data can be interpreted. Metrics are defined, not improvised. Entities have
-                canonical representations. Relationships are explicit. This reduces the surface area for error and makes discrepancies visible rather than
-                latent.
-            </p>
-
-            <p>
-                Importantly, this consistency is not just for humans. Applications, services, and AI systems increasingly rely on data semantics to make
-                decisions. Without a semantic layer, each system becomes its own interpreter, increasing the risk of misalignment. By centralizing meaning,
-                the semantic layer allows consistency to become a system invariant rather than a social agreement.
-            </p>
-
-            <h2>Implications for AI Systems</h2>
-
-            <p>
-                As AI systems become more integrated into decision-making workflows, the cost of semantic ambiguity increases. Models trained on inconsistent
-                definitions learn inconsistent behavior. Agents operating over poorly defined metrics produce outputs that are difficult to trust or explain.
-            </p>
-
-            <p>
-                A semantic layer provides a stable substrate for AI systems. It ensures that models consume data with well-defined meaning and that their outputs
-                align with shared definitions. In this sense, the semantic layer is a prerequisite for reliable AI, not an optional enhancement.
-            </p>
-
-            <p>
-                This parallels lessons from other areas of systems design: intelligence without structure is brittle. Reliability emerges when learning systems are
-                embedded within carefully designed abstractions.
-            </p>
-
-            <h2>Tradeoffs and Design Tensions</h2>
-
-            <p>
-                Introducing a semantic layer is not without cost. It requires upfront modeling effort, governance processes, and ongoing maintenance.
-                Over-constraining semantics too early can slow iteration or lock in assumptions that later prove incorrect.
-            </p>
-
-            <p>
-                The challenge is to strike a balance between rigidity and flexibility. Semantics must be explicit enough to ensure consistency, but adaptable enough
-                to evolve as understanding deepens. The most effective semantic layers treat definitions as living artifacts, subject to versioning, review, and
-                refinement.
-            </p>
-
-            <h2>Reflections</h2>
-
-            <p>
-                What makes the semantic layer compelling is not that it introduces new technology, but that it acknowledges a fundamental truth: data without meaning
-                does not scale.
-            </p>
-
-            <p>
-                As systems grow, semantics inevitably emerge. The question is whether they emerge implicitly, fragmented across the stack, or explicitly, as a shared
-                abstraction. The semantic layer represents a conscious decision to elevate meaning to a first-class concern. In doing so, it shifts the focus of data
-                systems from computation alone to interpretation, trust, and shared understanding.
-            </p>
-
-            <h2>Open Questions</h2>
-
-            <p>
-                Several questions remain open and worth continued exploration. How can semantic layers evolve alongside rapidly changing data and business needs?
-                What governance models best balance correctness with developer velocity? How should semantic layers interface with probabilistic systems like machine
-                learning models?
-            </p>
-
-            <p>
-                These questions sit at the intersection of data engineering, systems design, and applied AI, and they will increasingly shape how organizations build
-                reliable, intelligent systems.
-            </p>
-
+                        <div class="essay-meta">Thoughts on meaning, metrics, and enterprise-scale consistency</div>
+            
+                        <p>
+                            Modern data systems are remarkably good at storing and processing information. They are far less good at preserving meaning.
+                        </p>
+            
+                        <p>
+                            As organizations scale, data proliferates across warehouses, services, dashboards, and applications. Tables multiply, pipelines branch,
+                            and metrics are redefined in subtle ways by different teams. Over time, the same question asked in two different places can yield two
+                            different answers, each technically correct within its own local context. The problem is not a lack of data or computation, but a lack
+                            of shared semantics.
+                        </p>
+            
+                        <p>
+                            The semantic layer emerges as a response to this failure mode. It is not a visualization tool or a modeling convenience, but a systems
+                            abstraction: a deliberate boundary between raw data and interpretation.
+                        </p>
+            
+                        <h2>Data Without Semantics Is Not Reusable</h2>
+            
+                        <p>
+                            Raw data systems optimize for storage efficiency, query performance, and schema evolution. These are necessary concerns, but they do not
+                            address how humans and applications understand the data. Columns encode facts, but meaning lives elsewhere: in tribal knowledge,
+                            documentation, and business logic scattered across codebases.
+                        </p>
+            
+                        <p>
+                            Without an explicit semantic layer, meaning is re-encoded repeatedly in analytics queries, application logic, ML feature pipelines, and
+                            dashboards and reports. Each re-encoding is a chance for drift. Metrics begin to fragment, definitions subtly diverge, and confidence
+                            erodes. Teams stop asking whether a number is correct and start asking which version of the number they are looking at.
+                        </p>
+            
+                        <p>
+                            This fragmentation is not accidental. It is the natural outcome of systems that treat semantics as an emergent property rather than a
+                            first-class artifact.
+                        </p>
+            
+                        <h2>The Semantic Layer as an Abstraction Boundary</h2>
+            
+                        <p>
+                            The semantic layer formalizes meaning. It defines metrics, entities, relationships, and constraints in a shared, governed interface that
+                            sits between data infrastructure and consumers.
+                        </p>
+            
+                        <p>
+                            From a systems perspective, it plays a role similar to an API or an intermediate representation. It abstracts over physical schemas and
+                            storage details, provides stable contracts to downstream consumers, and centralizes logic that would otherwise be duplicated. The key
+                            insight is that semantics should not be inferred at query time. They should be declared once and reused everywhere.
+                        </p>
+            
+                        <p>
+                            When done well, the semantic layer becomes the single place where definitions live. Changes to business logic propagate consistently.
+                            Consumers stop re-implementing interpretation logic and instead rely on a shared vocabulary.
+                        </p>
+            
+                        <h2>Consistency as a System Property</h2>
+            
+                        <p>
+                            At scale, consistency is not achieved by coordination alone. It is achieved through structure.
+                        </p>
+            
+                        <p>
+                            The semantic layer enforces consistency by constraining how data can be interpreted. Metrics are defined, not improvised. Entities have
+                            canonical representations. Relationships are explicit. This reduces the surface area for error and makes discrepancies visible rather than
+                            latent.
+                        </p>
+            
+                        <p>
+                            Importantly, this consistency is not just for humans. Applications, services, and AI systems increasingly rely on data semantics to make
+                            decisions. Without a semantic layer, each system becomes its own interpreter, increasing the risk of misalignment. By centralizing meaning,
+                            the semantic layer allows consistency to become a system invariant rather than a social agreement.
+                        </p>
+            
+                        <h2>Implications for AI Systems</h2>
+            
+                        <p>
+                            As AI systems become more integrated into decision-making workflows, the cost of semantic ambiguity increases. Models trained on inconsistent
+                            definitions learn inconsistent behavior. Agents operating over poorly defined metrics produce outputs that are difficult to trust or explain.
+                        </p>
+            
+                        <p>
+                            A semantic layer provides a stable substrate for AI systems. It ensures that models consume data with well-defined meaning and that their outputs
+                            align with shared definitions. In this sense, the semantic layer is a prerequisite for reliable AI, not an optional enhancement.
+                        </p>
+            
+                        <p>
+                            This parallels lessons from other areas of systems design: intelligence without structure is brittle. Reliability emerges when learning systems are
+                            embedded within carefully designed abstractions.
+                        </p>
+            
+                        <h2>Tradeoffs and Design Tensions</h2>
+            
+                        <p>
+                            Introducing a semantic layer is not without cost. It requires upfront modeling effort, governance processes, and ongoing maintenance.
+                            Over-constraining semantics too early can slow iteration or lock in assumptions that later prove incorrect.
+                        </p>
+            
+                        <p>
+                            The challenge is to strike a balance between rigidity and flexibility. Semantics must be explicit enough to ensure consistency, but adaptable enough
+                            to evolve as understanding deepens. The most effective semantic layers treat definitions as living artifacts, subject to versioning, review, and
+                            refinement.
+                        </p>
+            
+                        <h2>Reflections</h2>
+            
+                        <p>
+                            What makes the semantic layer compelling is not that it introduces new technology, but that it acknowledges a fundamental truth: data without meaning
+                            does not scale.
+                        </p>
+            
+                        <p>
+                            As systems grow, semantics inevitably emerge. The question is whether they emerge implicitly, fragmented across the stack, or explicitly, as a shared
+                            abstraction. The semantic layer represents a conscious decision to elevate meaning to a first-class concern. In doing so, it shifts the focus of data
+                            systems from computation alone to interpretation, trust, and shared understanding.
+                        </p>
+            
+                        <h2>Open Questions</h2>
+            
+                        <p>
+                            Several questions remain open and worth continued exploration. How can semantic layers evolve alongside rapidly changing data and business needs?
+                            What governance models best balance correctness with developer velocity? How should semantic layers interface with probabilistic systems like machine
+                            learning models?
+                        </p>
+            
+                        <p>
+                            These questions sit at the intersection of data engineering, systems design, and applied AI, and they will increasingly shape how organizations build
+                            reliable, intelligent systems.
+                        </p>
+            </article>
         </div>
-    </section>
+    </main>
+    <footer class="site-footer">
+        <div class="shell">
+            <p>&copy; 2025 Natasha Akali &middot; <a href="../assets/resume.pdf" download>CV</a></p>
+        </div>
+    </footer>
+    <script src="../js/theme.js" defer></script>
 </body>
 </html>

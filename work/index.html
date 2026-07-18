@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work | Natasha Akali</title>
+    <script>
+        (function () {
+            var stored = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = stored === 'dark' || stored === 'light'
+                ? stored
+                : (prefersDark ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="site-header">
+        <div class="shell site-header-inner">
+            <a href="../index.html" class="site-brand">Natasha Akali</a>
+            <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav-panel">Menu</button>
+            <div id="site-nav-panel" class="site-header-end">
+                <nav aria-label="Primary">
+                    <ul class="site-nav">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../notes/index.html">Notes</a></li>
+                        <li><a href="index.html" aria-current="page">Work</a></li>
+                        <li><a href="../experience.html">Experience</a></li>
+                        <li><a href="mailto:nikki.akali@gmail.com">Contact</a></li>
+                    </ul>
+                </nav>
+                <button type="button" class="theme-switch" role="switch" aria-checked="false" aria-label="Use dark mode">
+                    <span class="theme-switch-icons" aria-hidden="true">
+                        <svg class="theme-icon theme-icon--sun" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                        <svg class="theme-icon theme-icon--moon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </span>
+                    <span class="theme-switch-thumb" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main" class="page-section">
+        <div class="shell">
+            <h1>Work</h1>
+            <p class="prose" style="margin-top: 1rem; margin-bottom: 2rem;">Projects where I scoped ambiguous problems, made technical and product decisions, and shipped systems with real users.</p>
+            <ul class="index-list">
+                <li class="index-item">
+                    <div class="index-item-header">
+                        <a href="../projects/job-tracker.html" class="index-item-title">Job Tracker</a>
+                        <p class="index-item-meta">Python · GCP · Firestore · Gmail OAuth · LLMs · React</p>
+                    </div>
+                    <p class="index-item-preview">Founded and built an AI-augmented job tracking platform that ingests Gmail data via OAuth and organizes application status automatically. Designed event-driven pipelines on GCP for high-volume email ingestion, deduplication, and structured extraction. Built evaluation and error analysis workflows to improve classification reliability, achieving a 20% reduction in misclassification and hallucinations.</p>
+                </li>
+                <li class="index-item">
+                    <div class="index-item-header">
+                        <a href="../projects/pocket-llm.html" class="index-item-title">Pocket-LLM</a>
+                        <p class="index-item-meta">Python · Transformers · Deep Learning</p>
+                    </div>
+                    <p class="index-item-preview">Lightweight GPT-style language model built from scratch for experimentation on small datasets. Implemented custom tokenizer, transformer architecture, and inference pipeline optimized for local deployment. Deep dive into understanding how large language models work internally, from attention mechanisms to positional encodings.</p>
+                </li>
+                <li class="index-item">
+                    <div class="index-item-header">
+                        <a href="../projects/resume-assistant.html" class="index-item-title">Resume Assistant</a>
+                        <p class="index-item-meta">Python · React · OpenAI API</p>
+                    </div>
+                    <p class="index-item-preview">AI-powered tool that tailors resumes to specific job descriptions using GPT models. Parses resume content, analyzes job requirements, and rewrites sections to highlight relevant experience. Full-stack application with React frontend for document editing and Python backend for LLM integration.</p>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="shell">
+            <p>&copy; 2025 Natasha Akali · <a href="../assets/resume.pdf" download>CV</a></p>
+        </div>
+    </footer>
+
+    <script src="../js/theme.js" defer></script>
+</body>
+</html>

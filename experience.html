@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience | Natasha Akali</title>
+    <script>
+        (function () {
+            var stored = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = stored === 'dark' || stored === 'light'
+                ? stored
+                : (prefersDark ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="site-header">
+        <div class="shell site-header-inner">
+            <a href="index.html" class="site-brand">Natasha Akali</a>
+            <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav-panel">Menu</button>
+            <div id="site-nav-panel" class="site-header-end">
+                <nav aria-label="Primary">
+                    <ul class="site-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="notes/index.html">Notes</a></li>
+                        <li><a href="work/index.html">Work</a></li>
+                        <li><a href="experience.html" aria-current="page">Experience</a></li>
+                        <li><a href="mailto:nikki.akali@gmail.com">Contact</a></li>
+                    </ul>
+                </nav>
+                <button type="button" class="theme-switch" role="switch" aria-checked="false" aria-label="Use dark mode">
+                    <span class="theme-switch-icons" aria-hidden="true">
+                        <svg class="theme-icon theme-icon--sun" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                        <svg class="theme-icon theme-icon--moon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </span>
+                    <span class="theme-switch-thumb" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main" class="page-section">
+        <div class="shell">
+            <h1>Experience</h1>
+
+            <section class="page-section page-section--ruled" style="padding-top: 2rem;" aria-labelledby="roles-heading">
+                <h2 id="roles-heading">Background</h2>
+                <ul class="roles-plain">
+                    <li>AI Solutions Lead / Technical Delivery Lead</li>
+                    <li>Technical Account Manager or Customer Engineering (AI and automation)</li>
+                    <li>Applied AI Engineer</li>
+                    <li>Product-minded Full-Stack Engineer</li>
+                    <li>ML Platform / Evaluation Engineer</li>
+                </ul>
+
+                <dl class="meta-dl">
+                    <dt>Location</dt>
+                    <dd>U.S.-based</dd>
+                    <dt>Education</dt>
+                    <dd>Carnegie Mellon University — B.S. Information Systems &amp; Computer Science (2024)</dd>
+                    <dt>Recent work</dt>
+                    <dd>AI Solutions Lead, Shipcom AI · Founder, Job Tracker · Ex-Microsoft</dd>
+                </dl>
+            </section>
+
+            <section class="page-section page-section--ruled" aria-labelledby="history-heading">
+                <h2 id="history-heading">History</h2>
+
+                <div class="exp-entry">
+                    <p class="exp-meta"><strong>AI Solutions Lead</strong> · Shipcom AI · <span>Jan 2026 – Present · Remote</span></p>
+                    <p class="exp-detail">Lead customer-facing delivery on a DoD AI contract: discovery, requirements, solution design, POC planning, QA, and rollout readiness.</p>
+                </div>
+                <div class="exp-entry">
+                    <p class="exp-meta"><strong>Founder</strong> · Job Tracker · <span>Sep 2025 – Present · Remote</span></p>
+                    <p class="exp-detail">Founded and built an ML-powered job application tracking platform, ingesting unstructured Gmail data via OAuth and transforming it into application-state predictions for end users. Built evaluation and error analysis workflows that reduced misclassification and hallucination rates by 20%. <a href="projects/job-tracker.html">Case study</a></p>
+                </div>
+                <div class="exp-entry">
+                    <p class="exp-meta"><strong>Technical Account Manager</strong> · Microsoft · <span>Aug 2024 – Jul 2025 · Redmond, WA</span></p>
+                    <p class="exp-detail">Partnered with government customers to design and deploy AI-driven automation workflows. Co-engineered an OpenAI-powered support insights agent processing 500+ tickets; contributed prompt templating, input validation, and context retrieval.</p>
+                </div>
+                <div class="exp-entry">
+                    <p class="exp-meta"><strong>Machine Learning Researcher</strong> · Carnegie Mellon, Schwartz Research Lab · <span>Jan 2023 – Aug 2023 · Pittsburgh, PA</span></p>
+                    <p class="exp-detail">Designed and trained custom ML pipelines in Python to analyze RNA sequences, improving early breast cancer detection accuracy by 18% and precision by 22%.</p>
+                </div>
+                <div class="exp-entry">
+                    <p class="exp-meta"><strong>Software Engineer Intern</strong> · Delta Dental of Michigan · <span>May 2022 – Aug 2022 · Okemos, MI</span></p>
+                    <p class="exp-detail">Developed a full stack insurance recommendation platform using JavaScript, Node.js, and MongoDB. Built a Go-based data generator and validated REST APIs.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="shell">
+            <p>&copy; 2025 Natasha Akali · <a href="assets/resume.pdf" download>CV</a></p>
+        </div>
+    </footer>
+
+    <script src="js/theme.js" defer></script>
+</body>
+</html>
