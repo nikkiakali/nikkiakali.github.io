@@ -1101,10 +1101,21 @@ html[data-theme="dark"] .home-glance {
         border-right: 1px solid var(--color-border);
     }
 
+    /* Undo 768px two-column padding overrides so dividers sit in even gutters */
+    .impact-item:nth-child(2n) {
+        padding-right: clamp(1.25rem, 2vw, 1.75rem);
+    }
+
     .impact-item:nth-child(n + 3) {
         margin-top: 0;
         padding-top: 0;
         border-top: none;
+        padding-left: clamp(1.25rem, 2vw, 1.75rem);
+        padding-right: clamp(1.25rem, 2vw, 1.75rem);
+    }
+
+    .impact-item:nth-child(n + 3):last-child {
+        padding-right: 0;
     }
 }
 
