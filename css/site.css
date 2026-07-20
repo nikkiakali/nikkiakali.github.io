@@ -701,6 +701,10 @@ li:last-child { margin-bottom: 0; }
 }
 
 /* Mobile nav */
+html.nav-open {
+    overflow: hidden;
+}
+
 @media (max-width: 767px) {
     .nav-toggle { display: inline-flex; align-items: center; }
 
